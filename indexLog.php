@@ -9,6 +9,38 @@
 
  =========================================================
 
+ <?php
+// session_start();
+    $uri = "mysql://avnadmin:AVNS_nQWLgfw78Yo-s2EJOWr@mysql-1fe3a468-duredure2402-e1c4.g.aivencloud.com:19845/defaultdb?ssl-mode=REQUIRED";
+
+    $fields = parse_url($uri);
+
+    // build the DSN including SSL settings
+    $conn = "mysql:";
+    $conn .= "host=" . $fields["host"];
+    $conn .= ";port=" . $fields["port"];;
+    $conn .= ";dbname=defaultdb";
+    $conn .= ";sslmode=verify-ca;sslrootcert=ca.pem";
+
+    try {
+        $db = new PDO($conn, $fields["user"], $fields["pass"]);
+        // Définir le mode d'erreur de PDO pour qu'il lance des exceptions
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // Lire les données de la base de données
+        $sql = "SELECT first, second, file FROM slideImage ORDER BY id DESC";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        die('Impossible de se connecter à la base de données : ' . $e->getMessage());
+    }
+
+    // Informations sur le dépôt GitHub
+    $githubRepo = 'dure-dure/triumphantwomen'; // Remplacez par votre dépôt
+    $githubBranch = 'main'; // Branche par défaut, remplacez si nécessaire
+
+  ?>
+
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
 <html lang="en" itemscope itemtype="http://schema.org/WebPage">
@@ -57,9 +89,6 @@
 
 
 
-<!-- Nepcha Analytics (nepcha.com) -->
-<!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
-<script defer data-site="Triumphantwomenint" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </head>
 
@@ -86,6 +115,16 @@
         <li class="nav-item my-auto ms-3 ms-lg-0">
           
           <a href="https://calendly.com/triumphantwomenint/coaching" class="btn btn-sm  bg-gradient-primary  mb-0 me-1 mt-2 mt-md-0">Book an appointment</a>
+          
+        </li>
+        <li class="nav-item my-auto ms-3 ms-lg-0">
+          
+          <a href="./index.php" class="btn btn-sm  bg-gradient-primary  mb-0 me-1 mt-2 mt-md-0">Log Out</a>
+          
+        </li>
+        <li class="nav-item my-auto ms-3 ms-lg-0">
+          
+          <a href="./pages/AddContent.php" class="btn btn-sm  bg-gradient-primary  mb-0 me-1 mt-2 mt-md-0">Add Content</a>
           
         </li>
       </ul>
@@ -382,98 +421,40 @@
 <section class="my-3">
   <div id="carouselExampleCaptions" class="carousel slide">
     <div class="carousel-inner">
-      <div class="carousel-item active">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-7 col-10 my-auto">
-              <br><h3 class="text-gradient text-primary mb-0"> You will like it and </h3>
-              <h3> You will have more.</h3>
-              <p class="pe-md-5 mb-4">
-                Most wonderful online Master Class by Triumphant Women . lead by Prophetess Deborah TSOGBE.
-      
-                With the theme : <b> Divine destiny</b>.<br><br><br>
-                <b>#Conference of Triumphant Women</b>
-              </p>
-      
-            </div>
-            <div class="col-md-5 col-12 my-auto">
-      
-                <img class="w-100 border-radius-lg shadow-lg" src="./assets/img/TW-Zoom3.png" alt="Product Image">
-      
-            </div>
-          </div>
-        
-        </div>
-      </div>
-      <div class="carousel-item">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-7 col-10 my-auto">
-              <br><h3 class="text-gradient text-primary mb-0"> You will like it and </h3>
-              <h3> You will have more.</h3>
-              <p class="pe-md-5 mb-4">
-                Most wonderful online conference by Triumphant Women . lead by Prophetess Deborah TSOGBE and Prophetess Tanya LAWSON.
-      
-                With the theme : <b> IDENTITY PURPOSE MARRIAGE</b>.<br><br><br>
-                <b>#Conference of Triumphant Women</b>
-              </p>
-      
-            </div>
-            <div class="col-md-5 col-12 my-auto">
-      
-                <img class="w-100 border-radius-lg shadow-lg" src="./assets/img/TW-Zmeet.png" alt="Product Image">
-      
-            </div>
-          </div>
-        
-        </div>
-      </div>
-      <div class="carousel-item">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-7 col-12 my-auto">
-              <br><h3 class="text-gradient text-primary mb-0"> You will like it and </h3>
-              <h3> You will have more.</h3>
-              <p class="pe-md-5 mb-4">
-                Most wonderful  conference by Triumphant Women . lead by Prophetess Deborah TSOGBE and Prophetess Tanya LAWSON.
-      
-                With the theme : <b> IDENTITY PURPOSE MARRIAGE</b>.<br><br><br>
-                <b>#Conference of Triumphant Women</b>
-              </p>
-      
-            </div>
-            <div class="col-md-5 col-12 my-auto">
-      
-                <img class="w-100 border-radius-lg shadow-lg" src="./assets/img/TW_conference.png" alt="Product Image">
-      
-            </div>
-          </div>
-        
-        </div>
-      </div>
-      <div class="carousel-item">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-7 col-12 my-auto">
-              <br><h3 class="text-gradient text-primary mb-0"> You will like it and </h3>
-              <h3> You will have more.</h3>
-              <p class="pe-md-5 mb-4">
-                Most wonderful conference by Triumphant Women . lead by Prophetess Deborah TSOGBE.
-      
-                With the theme : <b> Woman! rise and shine</b>. Will take place in France in Paris. <br><br><br>
-                <b>#Conference of Triumphant Women</b>
-              </p>
-      
-            </div>
-            <div class="col-md-5 col-12 my-auto">
-      
-                <img class="w-100 border-radius-lg shadow-lg" src="./assets/img/ParisFlyers2.png" alt="Product Image">
-      
-            </div>
-          </div>
-        
-        </div>
-      </div>
+    <?php if ($images): ?>
+      <?php foreach ($images as $index => $item): ?>
+            <div class="image-container">
+                <?php
+                // Construire l'URL de l'image sur GitHub
+                $imageUrl = "https://raw.githubusercontent.com/$githubRepo/$githubBranch/assets/img/" . htmlspecialchars($item['file']);
+                ?>
+                <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>" data-file-name="<?php echo htmlspecialchars($item['file']); ?>" data-file-path="<?php echo htmlspecialchars($imageUrl); ?>">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-7 col-10 my-auto">
+                        <br><h3 class="text-gradient text-primary mb-0"> You will like it and </h3>
+                        <h3> You will have more.</h3>
+                        <p class="pe-md-5 mb-4">
+                        <?php echo htmlspecialchars($item['first']); ?>
+                
+                          With the theme : <b> <?php echo htmlspecialchars($item['second']); ?></b>.<br><br><br>
+                          <b>#Conference of Triumphant Women</b>
+                        </p>
+                
+                      </div>
+                      <div class="col-md-5 col-12 my-auto">
+                      <img src="<?php echo $imageUrl; ?>" class="w-100 border-radius-lg shadow-lg" alt="<?php echo htmlspecialchars($item['first']); ?>">
+                          <!-- <img class="w-100 border-radius-lg shadow-lg" src="./assets/img/TW-Zoom3.png" alt="Product Image"> -->
+                
+                      </div>
+                    </div>
+                  
+                  </div>
+                </div>
+      <?php endforeach; ?>
+    <?php else: ?>
+        <p>Aucune image trouvée.</p>
+    <?php endif; ?> 
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -495,8 +476,6 @@
 
 </div>
 
-
-  
 
   <footer class="footer pt-5 mt-5">
   <div class="container">
@@ -651,7 +630,7 @@
         <div class="text-center">
           <p class="text-dark my-4 text-sm font-weight-normal">
             All rights reserved. Copyright © <script>document.write(new Date().getFullYear())</script> <a href="#">Triumphant Women</a> by
-            <a href="#" >#Dure-dure</a>.
+            <a href="https://api.whatsapp.com/send/?phone=%2B22893501993&text&type=phone_number&app_absent=0" target="_blank" >#Dure-dure</a>.
           </p>
         </div>
       </div>
@@ -711,24 +690,6 @@
 <script src="./assets/js/plugins/choices.min.js"></script>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Control Center for Material UI Kit: parallax effects, scripts for the example pages etc -->
-<!--  Google Maps Plugin    -->
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
 <script src="./assets/js/material-kit.min.js?v=3.0.4" type="text/javascript"></script>
 
 
@@ -782,6 +743,45 @@
       console.error(countUp5.error);
     }
   }
+
+   /* ----------------------------------------------------------- */
+  /*  6. GOOGLE MAP
+  /* ----------------------------------------------------------- */ 
+        
+    
+    
+
+    // ----------#Dd Del --------------
+
+    document.querySelectorAll('.carousel-item').forEach(item => {
+        item.addEventListener('contextmenu', function(e) {
+            // Empêcher le menu contextuel par défaut
+            e.preventDefault();
+
+            const fileName = item.getAttribute('data-file-name');
+            const filePath = item.getAttribute('data-file-path');
+            if (confirm("Voulez-vous vraiment supprimer cet élément ?")) {
+                fetch('__del.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ path: filePath, fileName: fileName })
+                })
+                .then(response => response.json())
+                .then(data => {
+                  
+                    if (data.success) {
+                        item.remove();
+                        alert("Élément supprimé avec succès.");
+                        
+                    } else {
+                        alert("Erreur lors de la suppression de l'élément.");
+                    }
+                });
+            }
+        });
+    });
 </script>
 
 

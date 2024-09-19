@@ -32,9 +32,6 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/material-kit.css?v=3.0.4" rel="stylesheet" />
-  <!-- Nepcha Analytics (nepcha.com) -->
-  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
-  <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
 </head>
 
 <body class="sign-in-basic">
@@ -46,7 +43,7 @@
       </a>
       
           <li class="nav-item my-auto ms-3 ms-lg-0">
-            <a href="" class="btn btn-sm  bg-gradient-primary  mb-0 me-1 mt-2 mt-md-0">Home</a>
+            <a href="../index.php" class="btn btn-sm  bg-gradient-primary  mb-0 me-1 mt-2 mt-md-0">Home</a>
           </li>
         </ul>
       </div>
@@ -63,50 +60,44 @@
               <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
                 <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Sign in</h4>
                 <div class="row mt-3">
-                  <div class="col-2 text-center ms-auto">
-                    <a class="btn btn-link px-3" href="javascript:;">
-                      <i class="fa fa-facebook text-white text-lg"></i>
-                    </a>
-                  </div>
-                  <div class="col-2 text-center px-1">
-                    <a class="btn btn-link px-3" href="javascript:;">
-                      <i class="fa fa-github text-white text-lg"></i>
-                    </a>
-                  </div>
-                  <div class="col-2 text-center me-auto">
-                    <a class="btn btn-link px-3" href="javascript:;">
-                      <i class="fa fa-google text-white text-lg"></i>
-                    </a>
-                  </div>
+                  <p class="text-white font-weight-bolder text-center ">&nbsp;Enter your email and password to Sign In&nbsp;</p>
                 </div>
               </div>
             </div>
             <div class="card-body">
-              <form role="form" class="text-start">
-                <div class="input-group input-group-outline my-3">
-                  <label class="form-label">Email</label>
-                  <input type="email" class="form-control">
+              <form action="../verification.php" method="POST" role="form" class="text-start">
+                <div class="input-group input-group-outline my-3" >
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" id="email" name="email" class="form-control"  autocomplete="email"required="">
                 </div>
                 <div class="input-group input-group-outline mb-3">
-                  <label class="form-label">Password</label>
-                  <input type="password" class="form-control">
+                  <label for="mot_de_passe" class="form-label">Password</label>
+                  <input type="password" id="mot_de_passe" name="mot_de_passe" class="form-control" autocomplete="mot_de_passe" required="">
                 </div>
-                <div class="form-check form-switch d-flex align-items-center mb-3">
+                <!-- <div class="form-check form-switch d-flex align-items-center mb-3">
                   <input class="form-check-input" type="checkbox" id="rememberMe" checked>
                   <label class="form-check-label mb-0 ms-3" for="rememberMe">Remember me</label>
-                </div>
+                </div> -->
                 <div class="text-center">
-                  <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
+                  <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
                 </div>
-                <p class="mt-4 text-sm text-center">
+                <!-- <p class="mt-4 text-sm text-center">
                   Don't have an account?
-                </p>
+                </p> -->
+                <?php
+                    if(isset($_GET['erreur'])){
+                        $err = $_GET['erreur'];
+                        if($err==1 || $err==2)
+                        echo "<p style='color:red'>Email ou mot de passe incorrect</p>";
+                    }
+                ?>
               </form>
             </div>
           </div>
         </div>
       </div>
     </div>
+    
     <footer class="footer position-absolute bottom-2 py-2 w-100">
       <div class="container">
         <div class="row align-items-center justify-content-lg-between">
@@ -116,24 +107,19 @@
                 document.write(new Date().getFullYear())
               </script>,
               made with <i class="fa fa-heart" aria-hidden="true"></i> by
-              <a href="https://www.creative-tim.com" class="font-weight-bold text-white" target="_blank">Creative Tim</a>
-              for a better web.
+              <a href="https://api.whatsapp.com/send/?phone=%2B22893501993&text&type=phone_number&app_absent=0" target="_blank class="font-weight-bold text-white" >#Dure-dure</a>
+              for Triumphant Women.
             </div>
           </div>
           <div class="col-12 col-md-6">
             <ul class="nav nav-footer justify-content-center justify-content-lg-end">
               <li class="nav-item">
-                <a href="https://www.creative-tim.com" class="nav-link text-white" target="_blank">Creative Tim</a>
+                <a href="../index.php" class="nav-link text-white" target="_blank">Triumphant Women</a>
               </li>
               <li class="nav-item">
-                <a href="https://www.creative-tim.com/presentation" class="nav-link text-white" target="_blank">About Us</a>
+                <a href="../index.php" class="nav-link text-white">About Us</a>
               </li>
-              <li class="nav-item">
-                <a href="https://www.creative-tim.com/blog" class="nav-link text-white" target="_blank">Blog</a>
-              </li>
-              <li class="nav-item">
-                <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-white" target="_blank">License</a>
-              </li>
+              
             </ul>
           </div>
         </div>
@@ -144,9 +130,6 @@
   <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
   <script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <!-- Control Center for Material UI Kit: parallax effects, scripts for the example pages etc -->
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
   <script src="../assets/js/material-kit.min.js?v=3.0.4" type="text/javascript"></script>
 </body>
 
